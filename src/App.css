@@ -2,13 +2,3 @@
   padding: 0px;
   margin: 0px;
 }
-h1,p,div {
-  background-color: blue;
-  color: white;
-}
-.h1 >h1>p{
-  background-color: red;
-}
-#h1 {
-  background-color: pink;
-}
