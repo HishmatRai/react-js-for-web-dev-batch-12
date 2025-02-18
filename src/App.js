@@ -4,27 +4,41 @@ import "./App.css";
 import About from "./About";
 import Contact from "./contact";
 import Login from "./login";
+import WebDevelopment from "./web-development";
 // const activePage = "Web Development";
 const App = () => {
-  const [activePage, setActivePage] = useState("Login");
-  const pagesList = [
-    "Web Development",
-    "Home",
-    "About",
-    "Contact",
-    "Gallery",
-    "Login",
-  ];
+  const [activePage, setActivePage] = useState("Web Development");
   // const pagesList = [
-  //   {
-  //     title: "Web Development",
-  //     component: <Web Development />,
-  //   },
-  //   {
-  //     title: "Home",
-  //     component: <Home />,
-  //   },
+  //   "Web Development",
+  //   "Home",
+  //   "About",
+  //   "Contact",
+  //   "Gallery",
+  //   "Login",
   // ];
+
+  const pagesList = [
+    {
+      title: "Web Development",
+      component: <WebDevelopment />,
+    },
+    {
+      title: "Home",
+      component: <Home />,
+    },
+    {
+      title: "About",
+      component: <About />,
+    },
+    {
+      title: "Contact",
+      component: <Contact />,
+    },
+    {
+      title: "Login",
+      component: <Login />,
+    },
+  ];
   // let username = "iHunar Academy";
   // let [username, setUsername] = React.useState("iHunar Academy");
   // const [email,setEmail] = useState("info@gmail.com")
@@ -55,8 +69,19 @@ const App = () => {
 
       {pagesList.map((value, index) => {
         return (
-          <button key={index} onClick={() => setActivePage(value)}>
-            {value}
+          <button
+            // style={{
+            //   backgroundColor: value.title === activePage ? "green" : "blue",
+            //   color:value.title === activePage ?"white":"black"
+            // }}
+            style={{
+              fontWeight: value.title === activePage && "bold",
+            }}
+            className={value.title === activePage ? "active-pages" : "pages"}
+            key={index}
+            onClick={() => setActivePage(value.title)}
+          >
+            {value.title}
           </button>
         );
       })}
@@ -66,11 +91,12 @@ const App = () => {
       <button onClick={() => setActivePage("Home")}>Home</button>
       <button onClick={() => setActivePage("About")}>About</button>
       <button onClick={() => setActivePage("Contact")}>Contact</button> */}
+      <br />
+      <br />
       <hr />
-      {activePage === "Web Development" ? (
-        <h1 style={{ backgroundColor: "red", color: "white" }}>
-          Web Development Page
-        </h1>
+      <br />
+      {/* {activePage === "Web Development" ? (
+        <WebDevelopment />
       ) : activePage === "About" ? (
         <About />
       ) : activePage === "Home" ? (
@@ -83,7 +109,13 @@ const App = () => {
         <h1 style={{ backgroundColor: "red", color: "white" }}>
           Page not Found!
         </h1>
-      )}
+      )} */}
+
+      {pagesList.map((val, index) => {
+        return (
+          <div key={index}>{val.title === activePage && val.component}</div>
+        );
+      })}
     </div>
   );
 };
