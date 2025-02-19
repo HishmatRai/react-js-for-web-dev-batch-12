@@ -2,22 +2,39 @@ import React, { useState } from "react";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
   let emailValidation =
     /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
   // login function
   const LoginHandler = () => {
+    setMessageType("error");
+    setTimeout(() => {
+      setMessage("")
+    }, 2000);
     if (email === "") {
-      alert("Email Required!");
+      // alert("Email Required!");
+      // setMessageType("error");
+      setMessage("Email Required!");
     } else if (!email.match(emailValidation)) {
-      alert("Please enter valid email address");
+      // alert("Please enter valid email address");
+      // setMessageType("error");
+      setMessage("Please enter valid email address");
     } else if (password === "") {
-      alert("Password Required!");
+      // alert("Password Required!");
+      // setMessageType("error");
+      setMessage("Password Required!");
     } else {
       console.log("Email :- ", email);
       console.log("Password :- ", password);
+      setMessageType("success");
+      setMessage("Success!");
       setEmail("");
-      setPassword("")
+      setPassword("");
+      setTimeout(() => {
+        setMessage("")
+      }, 2000);
     }
   };
   return (
@@ -40,6 +57,10 @@ const Login = () => {
         name="password"
         onChange={(e) => setPassword(e.target.value)}
       />
+      <p style={{ color: messageType === "error" ? "red" : "green" }}>
+        {message}
+      </p>
+      <p className={messageType === "error" ? "error" : "success"}>{message}</p>
       <button onClick={LoginHandler}>Log In</button>
     </div>
   );

@@ -21,3 +21,11 @@
   padding: 5px 10px;
   border: 1px solid gray;
 }
+
+
+.error{
+  color: red;
+}
+.success{
+  color: green;
+}
