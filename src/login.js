@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "./components/navbar";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,6 +41,7 @@ const Login = () => {
   return (
     <div>
       <h1 style={{ backgroundColor: "blue", color: "white" }}>Login Page</h1>
+    <Navbar />
       <p>Email :- {email}</p>
       <p>Email Address</p>
       <input

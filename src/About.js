@@ -1,4 +1,5 @@
 import React, { Suspense, useState } from "react";
+import Navbar from "./components/navbar";
 const About = () => {
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState([]);
@@ -35,6 +36,7 @@ const About = () => {
   return (
     <div>
       <h1 style={{ backgroundColor: "green", color: "white" }}>About Page</h1>
+    <Navbar />
       <h1>Todo App</h1>
       <input
         type="text"
