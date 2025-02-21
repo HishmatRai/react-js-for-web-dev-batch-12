@@ -2,30 +2,3 @@
   padding: 0px;
   margin: 0px;
 }
-
-.pages {
-  background-color: blue;
-  color: white;
-  border-radius: 5px 0px;
-  margin-right: 5px;
-  outline: none;
-  padding: 5px 10px;
-  border: 1px solid gray;
-}
-.active-pages {
-  background-color: green;
-  border-radius: 5px;
-  color: white;
-  margin-right: 5px;
-  outline: none;
-  padding: 5px 10px;
-  border: 1px solid gray;
-}
-
-
-.error{
-  color: red;
-}
-.success{
-  color: green;
-}

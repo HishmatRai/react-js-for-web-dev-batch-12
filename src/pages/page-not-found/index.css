@@ -1,0 +1,17 @@
+.page-not-found{
+    background-color: gray;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.page-not-found>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#page-not-found-btn{
+    text-transform: capitalize;
+    margin-top: 20px;
+}
