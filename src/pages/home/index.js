@@ -27,6 +27,72 @@ const Home = () => {
       <Button title="Sign Up" borderRadius={70} outline={true} />
       <Button title="Remove" borderRadius={25} />
       <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
+      <Button title="Edit" borderRadius={0} />
+      <Button title="Sign Up" borderRadius={70} outline={true} />
+      <Button title="Remove" borderRadius={25} />
+      <Button title="Add" borderRadius={98} />
     </div>
   );
 };
