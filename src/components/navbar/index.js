@@ -34,7 +34,7 @@ const pages = [
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-const Navbar = () => {
+const Navbar = ({ url }) => {
   const navigate = useNavigate();
   const routerLoaction = useLocation();
   let currentPath = routerLoaction.pathname;
@@ -161,7 +161,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={url ? url :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwdIVSqaMsmZyDbr9mDPk06Nss404fosHjLg&s"} />
               </IconButton>
             </Tooltip>
             <Menu

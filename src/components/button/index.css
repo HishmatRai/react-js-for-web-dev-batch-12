@@ -1,0 +1,21 @@
+.button-component{
+    border: none;
+    outline: none;
+    background-color: blue;
+    color: white;
+    /* border-radius: 5px ; */
+    padding: 5px 20px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.outlin-button-component{
+    border: none;
+    outline: none;
+    border: 1px solid blue;
+    color: blue;
+    /* border-radius: 5px ; */
+    padding: 5px 20px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
