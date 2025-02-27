@@ -28,6 +28,10 @@ const pages = [
     path: "/contact",
   },
   {
+    title: "News",
+    path: "/news",
+  },
+  {
     title: "Gallery",
     path: "/gallery",
   },
