@@ -2,6 +2,7 @@ import React from "react";
 import { Layout } from "../../components";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import './index.css'
 const News = () => {
   const navigate = useNavigate();
   const newsArray = [
@@ -70,10 +71,28 @@ const News = () => {
               <p>Title :- {val.title}</p>
               <p>Author :- {val.author}</p>
               {/* <p>Content :- {val.content}</p> */}
-              <p>Content :- {val.content.slice(0, 20)}</p>
-              <p>createdAt :- {moment(val.createdAt).format("MMM DD, YYYY")}</p>
+              <p className="news-title">Content :- {val.content}</p>
+              <p >createdAt :- {moment(val.createdAt).format("MMM DD, YYYY")}</p>
               {/* <p>createdAt :- {moment(val.createdAt).format('MMMM Do YYYY, h:mm:ss a').fromNow()}</p> */}
-              <button onClick={() => navigate(`/news-details/${val.createdAt}`)}>
+              <button
+                // onClick={() =>
+                //   navigate(`/news-details/${val.title}`, {
+                //     state: {
+                //       title: val.title,
+                //       author: val.author,
+                //       content: val.content,
+                //       createdAt: val.createdAt,
+                //     },
+                //   })
+                // }
+                onClick={() =>
+                  navigate(`/news-details/${val.title}`, {
+                    state: 
+                      val,
+                  
+                  })
+                }
+              >
                 View Details
               </button>
             </div>

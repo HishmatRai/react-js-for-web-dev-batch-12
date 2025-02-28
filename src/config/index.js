@@ -1,2 +1,3 @@
 import Router from "./router";
-export { Router };
+import Firebase from "./firebase";
+export { Router, Firebase };

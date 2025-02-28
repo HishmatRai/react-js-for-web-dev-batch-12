@@ -1,3 +1,4 @@
 import Button from "./button";
 import Layout from "./layout";
-export { Button, Layout };
+import Input from "./input";
+export { Button, Layout ,Input};
