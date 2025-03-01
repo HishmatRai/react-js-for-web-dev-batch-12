@@ -2,7 +2,17 @@ import React, { useState } from "react";
 import { Input, Button } from "../../components";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+// import {
+//   SignInWithGoogleHandle,
+//   SignInWithFacebookHandle,
+// } from "../../config/firebase/social-login";
+import SocailLogin from "./../../config/firebase/social-login";
 const Login = () => {
+  const { SignInWithGoogleHandle, SignInWithFacebookHandle } = SocailLogin();
+  const auth = getAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const emailValidation =
@@ -18,9 +28,21 @@ const Login = () => {
       //   alert("Password Required!");
       toast("Password Required!", { type: "error" });
     } else {
-      console.log("Email", email);
-      console.log("Password", password);
-      toast("Success!", { type: "success" });
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log("user", user);
+          // ...
+          toast("Signed in !", { type: "success" });
+          setEmail("");
+          setPassword("");
+          navigate("/");
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          toast(errorMessage, { type: "error" });
+        });
     }
   };
   return (
@@ -42,6 +64,17 @@ const Login = () => {
       />
       <Button title="Sign In" onClick={SingInHandler} />
       <Link to="/sign-up">Sign Up</Link>
+      <hr />
+      <Button
+        title="Sign In with Google"
+        onClick={SignInWithGoogleHandle}
+        borderRadius={10}
+      />
+      <Button
+        title="Sign In with Facebook"
+        onClick={() => SignInWithFacebookHandle()}
+        borderRadius={10}
+      />
     </div>
   );
 };

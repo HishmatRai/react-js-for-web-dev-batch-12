@@ -1,11 +1,10 @@
 import React from "react";
 import { Layout } from "../../components";
-const Contact = () => {
+const Profile = () => {
   return (
-    <Layout >
-      <h1>Contact.js</h1>
+    <Layout>
+      <h1>Profile.js</h1>
     </Layout>
   );
 };
-export default Contact;
-
+export default Profile;

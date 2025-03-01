@@ -13,7 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, onSnapshot, getFirestore } from "firebase/firestore";
 
 // const pages = ["Home", "About", "Contact"];
 const pages = [
@@ -22,8 +23,8 @@ const pages = [
     path: "/",
   },
   {
-    title: "About",
-    path: "/about",
+    title: "Profile",
+    path: "/profile",
   },
   {
     title: "Contact",
@@ -38,12 +39,15 @@ const pages = [
     path: "/gallery",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-const Navbar = ({ url }) => {
+const settings = ["Logout"];
+const Navbar = () => {
   const auth = getAuth();
+  const db = getFirestore();
   const navigate = useNavigate();
   const routerLoaction = useLocation();
   const [isLogin, setIsLogin] = useState(false);
+  const [profileURl, setProfileURL] = useState(null);
+  const [name,setName] = useState("")
   let currentPath = routerLoaction.pathname;
   console.log("currentPath", currentPath);
   useEffect(() => {
@@ -51,13 +55,18 @@ const Navbar = ({ url }) => {
       if (user) {
         console.log("Login true", user);
         setIsLogin(true);
+        const unsub = onSnapshot(doc(db, "users", user.uid), (doc) => {
+          console.log("Current data: ", doc.data());
+          setProfileURL(doc.data()?.photoURL);
+          setName(doc.data()?.name)
+        });
       } else {
         console.log("User is signed out");
         setIsLogin(false);
       }
     });
   }, []);
-
+console.log("profileURl",profileURl)
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -83,6 +92,14 @@ const Navbar = ({ url }) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        setIsLogin(false);
+      })
+      .catch((error) => {
+        // An error happened.
+      });
   };
   return (
     <AppBar position="static">
@@ -184,10 +201,10 @@ const Navbar = ({ url }) => {
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
-                      alt="Remy Sharp"
+                      alt={name}
                       src={
-                        url
-                          ? url
+                        profileURl
+                          ? profileURl
                           : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwdIVSqaMsmZyDbr9mDPk06Nss404fosHjLg&s"
                       }
                     />

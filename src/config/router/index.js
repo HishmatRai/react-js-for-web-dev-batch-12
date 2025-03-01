@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Home,
   Contact,
-  About,
+  Profile,
   PageNotFound,
   News,
   NewDetails,
@@ -16,7 +16,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/news" element={<News />} />
         <Route path="/log-in" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
