@@ -47,9 +47,8 @@ const Navbar = () => {
   const routerLoaction = useLocation();
   const [isLogin, setIsLogin] = useState(false);
   const [profileURl, setProfileURL] = useState(null);
-  const [name,setName] = useState("")
+  const [name, setName] = useState("");
   let currentPath = routerLoaction.pathname;
-  console.log("currentPath", currentPath);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -58,7 +57,7 @@ const Navbar = () => {
         const unsub = onSnapshot(doc(db, "users", user.uid), (doc) => {
           console.log("Current data: ", doc.data());
           setProfileURL(doc.data()?.photoURL);
-          setName(doc.data()?.name)
+          setName(doc.data()?.name);
         });
       } else {
         console.log("User is signed out");
@@ -66,7 +65,6 @@ const Navbar = () => {
       }
     });
   }, []);
-console.log("profileURl",profileURl)
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -224,7 +222,7 @@ console.log("profileURl",profileURl)
                     horizontal: "right",
                   }}
                   open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
+                  onClose={()=> setAnchorElUser(null)}
                 >
                   {settings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>

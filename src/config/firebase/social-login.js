@@ -21,11 +21,11 @@
 // };
 // export { SignInWithGoogleHandle, SignInWithFacebookHandle };
 
-import React from "react";
+import React, { use } from "react";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import Firebase from "./index";
 import { useNavigate } from "react-router-dom";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, onSnapshot } from "firebase/firestore";
 
 const SocailLogin = () => {
   const navigate = useNavigate();
@@ -38,12 +38,24 @@ const SocailLogin = () => {
       .then(async (result) => {
         const user = result.user;
         console.log("user", user);
-        await setDoc(doc(db, "users", user.uid), {
-          name: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
-        });
-        navigate("/");
+        const unsub = onSnapshot(
+          doc(db, "users", user.uid),
+          async (userRes) => {
+            const currentData = userRes.data();
+            if (currentData) {
+              navigate("/");
+            } else {
+              await setDoc(doc(db, "users", user.uid), {
+                name: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+              });
+              navigate("/");
+            }
+          }
+        );
+
+        //
       })
       .catch((error) => {
         const errorMessage = error.message;

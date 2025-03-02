@@ -1,4 +1,5 @@
 import Button from "./button";
 import Layout from "./layout";
 import Input from "./input";
-export { Button, Layout ,Input};
+import UploadProgress from "./upload-progress";
+export { Button, Layout, Input, UploadProgress };
