@@ -8,7 +8,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { getDatabase ,ref, set} from "firebase/database";
-import { getFirestore ,doc, setDoc} from "firebase/firestore";
+import { getFirestore ,doc, setDoc,} from "firebase/firestore";
 
 import SocailLogin from "./../../config/firebase/social-login";
 const SignUp = () => {

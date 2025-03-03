@@ -6,6 +6,7 @@ import News from "./news";
 import NewDetails from "./new-details";
 import Login from "./log-in";
 import SignUp from "./sign-up";
+import CreateBlog from "./create-blog";
 export {
   Home,
   Contact,
@@ -15,4 +16,5 @@ export {
   NewDetails,
   SignUp,
   Login,
+  CreateBlog,
 };

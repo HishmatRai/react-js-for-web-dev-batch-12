@@ -27,17 +27,21 @@ const pages = [
     path: "/profile",
   },
   {
-    title: "Contact",
-    path: "/contact",
+    title: "Create Blog",
+    path: "/create-blog",
   },
-  {
-    title: "News",
-    path: "/news",
-  },
-  {
-    title: "Gallery",
-    path: "/gallery",
-  },
+  // {
+  //   title: "Contact",
+  //   path: "/contact",
+  // },
+  // {
+  //   title: "News",
+  //   path: "/news",
+  // },
+  // {
+  //   title: "Gallery",
+  //   path: "/gallery",
+  // },
 ];
 const settings = ["Logout"];
 const Navbar = () => {
