@@ -1,20 +1,23 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Skeleton from "@mui/material/Skeleton";
-
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import CommentIcon from "@mui/icons-material/Comment";
+import "./index.css";
+import ShareIcon from "@mui/icons-material/Share";
+import moment from "moment/moment";
+import ReactPlayer from "react-player";
 function Media(props) {
-  const { loading } = props;
-
+  const { loading, data } = props;
   return (
-    <Card sx={{ maxWidth: 345, m: 2 }}>
+    <Card >
       <CardHeader
         avatar={
           loading ? (
@@ -31,13 +34,6 @@ function Media(props) {
             />
           )
         }
-        // action={
-        //   loading ? null : (
-        //     <IconButton aria-label="settings">
-        //       <MoreVertIcon />
-        //     </IconButton>
-        //   )
-        // }
         title={
           loading ? (
             <Skeleton
@@ -54,19 +50,30 @@ function Media(props) {
           loading ? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
-            "5 hours ago"
+            moment(data?.createdAt).fromNow()
           )
         }
       />
       {loading ? (
         <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
       ) : (
-        <CardMedia
-          component="img"
-          height="140"
-          image="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/72bda89f-9bbf-4685-910a-2f151c4f3a8a/NicolaSturgeon_2019T-embed.jpg?w=512"
-          alt="Nicola Sturgeon on a TED talk stage"
-        />
+        <div>
+          {data?.fileType.slice(0, 5) === "video" ? (
+            <ReactPlayer
+              url={data?.fileURL}
+              controls={true}
+              height={190}
+              width={"100%"}
+            />
+          ) : (
+            <CardMedia
+              component="img"
+              height="190"
+              image={data?.fileURL}
+              alt="Nicola Sturgeon on a TED talk stage"
+            />
+          )}
+        </div>
       )}
       <CardContent>
         {loading ? (
@@ -83,14 +90,13 @@ function Media(props) {
             variant="body2"
             component="p"
             sx={{ color: "text.secondary" }}
+            className="card-title"
           >
-            {
-              "Why First Minister of Scotland Nicola Sturgeon thinks GDP is the wrong measure of a country's success:"
-            }
+            {data?.title}
           </Typography>
         )}
       </CardContent>
-          <CardContent>
+      <CardContent>
         {loading ? (
           <React.Fragment>
             <Skeleton
@@ -105,25 +111,89 @@ function Media(props) {
             variant="body2"
             component="p"
             sx={{ color: "text.secondary" }}
+            className="card-details"
           >
-            {
-              "Why First Minister of Scotland Nicola Sturgeon thinks GDP is the wrong measure of a country's success:"
-            }
+            {data?.details}
           </Typography>
+        )}
+      </CardContent>
+      <CardContent>
+        {loading ? (
+          <div className="card-footer">
+            <React.Fragment>
+              <Skeleton animation="wave" height={40} width="20%" />
+            </React.Fragment>
+            <React.Fragment>
+              <Skeleton animation="wave" height={40} width="20%" />
+            </React.Fragment>
+            <React.Fragment>
+              <Skeleton animation="wave" height={40} width="20%" />
+            </React.Fragment>
+          </div>
+        ) : (
+          <div className="card-footer">
+            <div>
+              <ThumbUpIcon />
+              <span>{data?.likes.length}</span>
+            </div>
+            <div>
+              <CommentIcon />
+              <span>{data?.comments.length}</span>
+            </div>
+            <div>
+              <ShareIcon />
+              <span>{data?.share}</span>
+            </div>
+          </div>
         )}
       </CardContent>
     </Card>
   );
 }
-
-const BlogCard = () => {
+const BlogCard = ({ loading, data }) => {
   return (
     <div>
-      <Media loading={true} />
-      <Media loading={true} />
-      <Media loading={true} />
-      <Media loading={true} />
-      <Media loading={true} />
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={0}>
+          <Grid item xl={1} lg={1} md={1} sm={1} xs={1} />
+          <Grid item xl={10} lg={10} md={10} sm={10} xs={10}>
+            <Grid container spacing={2}>
+              {/* {(loading ? Array.from(new Array(8)) : data).map(
+                (val, index) => {
+                  return (
+                    <Grid item key={index} xl={3} lg={3} md={4} sm={6} xs={12}>
+                      <Media loading={loading} />
+                    </Grid>
+                  );
+                }
+              )} */}
+              {loading ? (
+                Array.from(new Array(8)).map((val, index) => {
+                  return (
+                    <Grid item key={index} xl={3} lg={3} md={4} sm={6} xs={12}>
+                      <Media loading={loading} />
+                    </Grid>
+                  );
+                })
+              ) : data?.length === 0 ? (
+                <div style={{ marginTop: "150px" }}>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLVwmq2Npv0ZYmby3axjvoMykUvTPt48T5DA&s" />
+                  <h1>Data not Found!</h1>
+                </div>
+              ) : (
+                data?.map((val, index) => {
+                  return (
+                    <Grid item key={index} xl={3} lg={3} md={4} sm={6} xs={12}>
+                      <Media loading={loading} data={val} />
+                    </Grid>
+                  );
+                })
+              )}
+            </Grid>
+          </Grid>
+          <Grid item xl={1} lg={1} md={1} sm={1} xs={1} />
+        </Grid>
+      </Box>
     </div>
   );
 };
