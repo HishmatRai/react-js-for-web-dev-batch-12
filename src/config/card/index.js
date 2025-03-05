@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -14,10 +14,11 @@ import "./index.css";
 import ShareIcon from "@mui/icons-material/Share";
 import moment from "moment/moment";
 import ReactPlayer from "react-player";
+import { Input } from "../../components";
 function Media(props) {
   const { loading, data } = props;
   return (
-    <Card >
+    <Card>
       <CardHeader
         avatar={
           loading ? (
@@ -151,6 +152,10 @@ function Media(props) {
   );
 }
 const BlogCard = ({ loading, data }) => {
+  const [search, setSearch] = useState("");
+  const filterResult = data?.filter((data) =>
+    data.title.toLowerCase().includes(search.toLowerCase())
+  );
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -158,6 +163,15 @@ const BlogCard = ({ loading, data }) => {
           <Grid item xl={1} lg={1} md={1} sm={1} xs={1} />
           <Grid item xl={10} lg={10} md={10} sm={10} xs={10}>
             <Grid container spacing={2}>
+              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                <Input
+                  type="search"
+                  title="Search"
+                  placeholder="Search ...."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </Grid>
               {/* {(loading ? Array.from(new Array(8)) : data).map(
                 (val, index) => {
                   return (
@@ -175,13 +189,13 @@ const BlogCard = ({ loading, data }) => {
                     </Grid>
                   );
                 })
-              ) : data?.length === 0 ? (
+              ) : filterResult?.length === 0 ? (
                 <div style={{ marginTop: "150px" }}>
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLVwmq2Npv0ZYmby3axjvoMykUvTPt48T5DA&s" />
                   <h1>Data not Found!</h1>
                 </div>
               ) : (
-                data?.map((val, index) => {
+                filterResult?.map((val, index) => {
                   return (
                     <Grid item key={index} xl={3} lg={3} md={4} sm={6} xs={12}>
                       <Media loading={loading} data={val} />

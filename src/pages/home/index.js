@@ -6,25 +6,34 @@ import {
   where,
   onSnapshot,
   getFirestore,
+  doc,
 } from "firebase/firestore";
 const Home = () => {
   const db = getFirestore();
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
-    const q = query(collection(db, "blogs"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const newBlogs = [];
-      querySnapshot.forEach((doc) => {
-        newBlogs.push(doc.data());
-        // user data
+    const fetchData = () => {
+      const q = query(collection(db, "blogs"));
+      onSnapshot(q, (querySnapshot) => {
+        const newBlogs = [];
+        querySnapshot.forEach((blogRes) => {
+          let finalData = {};
+          onSnapshot(doc(db, "users", blogRes?.data()?.uid), (userRes) => {
+            finalData = { ...userRes.data() };
+            console.log("---------finalData-----------1", finalData);
+          });
+          newBlogs.push({ ...blogRes?.data() });
+          console.log("---------finalData-----------2", finalData);
+        });
+        setBlogs(newBlogs);
+        setLoading(false);
       });
-      setBlogs(newBlogs);
-      setLoading(false);
-    });
+    };
+    fetchData();
   }, []);
-  console.log("blogs: ", blogs);
 
+  console.log("----------------blogs ---->>", blogs);
   return (
     <Layout>
       {/* {loading ? (

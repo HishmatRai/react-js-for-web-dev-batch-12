@@ -59,7 +59,7 @@ const Navbar = () => {
         console.log("Login true", user);
         setIsLogin(true);
         const unsub = onSnapshot(doc(db, "users", user.uid), (doc) => {
-          console.log("Current data: ", doc.data());
+          // console.log("Current data: ", doc.data());
           setProfileURL(doc.data()?.photoURL);
           setName(doc.data()?.name);
         });
