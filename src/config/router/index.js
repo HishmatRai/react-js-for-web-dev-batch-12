@@ -9,7 +9,8 @@ import {
   NewDetails,
   Login,
   SignUp,
-  CreateBlog
+  CreateBlog,
+  BlogDetails,
 } from "./../../pages";
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="/log-in" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/create-blog" element={<CreateBlog />} />
+        <Route path="/blog-details/:id" element={<BlogDetails />} />
         <Route path="/news-details/:id" element={<NewDetails />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>

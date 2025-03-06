@@ -14,11 +14,16 @@ import "./index.css";
 import ShareIcon from "@mui/icons-material/Share";
 import moment from "moment/moment";
 import ReactPlayer from "react-player";
-import { Input } from "../../components";
+import Input from "../input";
+import { useNavigate } from "react-router-dom";
 function Media(props) {
   const { loading, data } = props;
+  const navigate = useNavigate();
   return (
-    <Card>
+    <Card
+      onClick={() => navigate(`/blog-details/${data?.id}`)}
+      style={{ cursor: "pointer" }}
+    >
       <CardHeader
         avatar={
           loading ? (
@@ -29,10 +34,7 @@ function Media(props) {
               height={40}
             />
           ) : (
-            <Avatar
-              alt="Ted talk"
-              src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
-            />
+            <Avatar alt={data?.user?.name} src={data?.user?.photoURL} />
           )
         }
         title={
@@ -44,7 +46,7 @@ function Media(props) {
               style={{ marginBottom: 6 }}
             />
           ) : (
-            "Ted"
+            data?.user?.name
           )
         }
         subheader={
@@ -153,7 +155,12 @@ function Media(props) {
 }
 const BlogCard = ({ loading, data }) => {
   const [search, setSearch] = useState("");
-  const filterResult = data?.filter((data) =>
+  // sort
+  let sortData = data.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+  console.log("sortData", sortData);
+  const filterResult = sortData?.filter((data) =>
     data.title.toLowerCase().includes(search.toLowerCase())
   );
   return (

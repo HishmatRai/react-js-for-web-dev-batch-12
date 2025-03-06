@@ -9,7 +9,13 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
@@ -65,7 +71,10 @@ const CreateBlog = () => {
         fileType: fileType,
       };
       const docRef = await addDoc(collection(db, "blogs"), newBlog);
-      console.log("Document written with ID: ", docRef.id);
+      const blogRes = doc(db, "blogs", docRef.id);
+      await updateDoc(blogRes, {
+        id: docRef.id,
+      });
       console.log("newBlog", newBlog);
       setLoading(false);
       toast("Success", { type: "success" });

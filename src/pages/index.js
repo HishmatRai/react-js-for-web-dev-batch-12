@@ -7,6 +7,7 @@ import NewDetails from "./new-details";
 import Login from "./log-in";
 import SignUp from "./sign-up";
 import CreateBlog from "./create-blog";
+import BlogDetails from "./blog-details";
 export {
   Home,
   Contact,
@@ -17,4 +18,5 @@ export {
   SignUp,
   Login,
   CreateBlog,
+  BlogDetails
 };
