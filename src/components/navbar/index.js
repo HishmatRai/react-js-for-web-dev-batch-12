@@ -30,10 +30,10 @@ const pages = [
     title: "Create Blog",
     path: "/create-blog",
   },
-  // {
-  //   title: "Contact",
-  //   path: "/contact",
-  // },
+  {
+    title: "Contact",
+    path: "/contact",
+  },
   // {
   //   title: "News",
   //   path: "/news",
